@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { DefaultMessageResponse } from '../../types/DefaultMsgResponse';
+import { DefaultMessageResponse } from '../../types/DefaultMessageResponse';
 
 export default (req: NextApiRequest, res: NextApiResponse<DefaultMessageResponse>) => {
     if (req.method === 'POST') {
@@ -11,5 +11,5 @@ export default (req: NextApiRequest, res: NextApiResponse<DefaultMessageResponse
 
         return res.status(200).json({error: 'Credenciais inválidas'})
     }
-    return res.status(405).json({error: 'Método informado não é permitido'})
+    return res.status(405).json({error: 'O método informado não é permitido'})
 }
