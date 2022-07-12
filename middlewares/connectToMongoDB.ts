@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import type { NextApiRequest, NextApiResponse, NextApiHandler } from "next";
-import { DefaultMessageResponse } from "../types/DefaultMsgResponse";
+import { DefaultMessageResponse } from "../types/DefaultMessageResponse";
 
 export const connect = 
     (handler: NextApiHandler) => async (req: NextApiRequest, res: NextApiResponse<DefaultMessageResponse>) => {

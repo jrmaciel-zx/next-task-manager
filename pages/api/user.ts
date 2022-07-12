@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { UserModel } from "../../models/UserModel";
-import { DefaultMessageResponse } from '../../types/DefaultMsgResponse';
+import { DefaultMessageResponse } from '../../types/DefaultMessageResponse';
 import { connect } from '../../middlewares/connectToMongoDB'
 
 const registerEndpoint = async (req: NextApiRequest, res: NextApiResponse<DefaultMessageResponse>) => {
@@ -9,7 +9,7 @@ const registerEndpoint = async (req: NextApiRequest, res: NextApiResponse<Defaul
             const {name, email, password} = req.body;
 
             if (!name || name.trim().length < 2) {
-                return res.status(400).json({error: 'Nome não é ' + req.body});
+                return res.status(400).json({error: 'O nome não é válido'});
             };
 
             if (!password || password.trim().length < 6) {
@@ -17,8 +17,8 @@ const registerEndpoint = async (req: NextApiRequest, res: NextApiResponse<Defaul
             };
 
             if (!email || email.trim().length < 5 
-                || !email.includes('@') || email.includes('.')) {
-                return res.status(400).json({error: 'Email não é válido'})
+                || !email.includes('@') || !email.includes('.')) {
+                return res.status(400).json({error: 'A senha não é válida'})
             };
 
             const user = {
