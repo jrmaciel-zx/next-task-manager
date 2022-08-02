@@ -1,11 +1,11 @@
-import mongoose, {Schema} from "mongoose";
+import mongoose, {Schema} from 'mongoose';
 
-const TaskSchema = new Schema (
-    {
-        description: {type: String, required: true},
-        conclusion: {type: Date, required: true},
-        status: {type: String, required: true}
-    }
-);
+const TaskSchema = new Schema({
+    name : {type : String, required: true},
+    userId : {type : String, required : true},
+    previsionDate : {type : Date, required: true},
+    finishDate : {type : Date, required: false}
+});
 
-export const TaskModel = mongoose.models.users || mongoose.model('tasks', TaskSchema);
+export const TaskModel = (mongoose.models.tasks 
+    || mongoose.model('tasks', TaskSchema));
