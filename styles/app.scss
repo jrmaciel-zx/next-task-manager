@@ -1,4 +1,6 @@
 @import "~bootstrap/scss/bootstrap";
+@import './configs.scss';
+@import './login.scss';
 
 @font-face {
     font-family: "Biennale Regular";
@@ -28,4 +30,5 @@ body {
     -webkit-box-align: center;
 }
 
+@import './configs.scss';
 @import './login.scss';
