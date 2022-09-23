@@ -12,15 +12,17 @@ export const Login : NextPage<AccessTokenProps> = ({setAccessToken}) => {
     const doLogin = async(evento : MouseEvent) => {
         try {
             evento.preventDefault();
+            setError('');
+            
             if (!login || !password) {
-                return setError('Favor informar o usuário e senha');
+                return setError("Favor informar o usuário e senha");
             }
             
             const body = {login, password};
-            const result = await executeRequest('login', 'POST', body);
+            const result = await executeRequest('login', 'POST', body);            
             
             if (!result || !result.data) {
-                return setError('Ocorreu um erro ao processar login, tente novamente.');
+                return setError("Ocorreu um erro ao processar login, tente novamente.");
             }
 
             const {name, email, token} = result.data;
@@ -28,28 +30,27 @@ export const Login : NextPage<AccessTokenProps> = ({setAccessToken}) => {
             localStorage.setItem('userName', name);
             localStorage.setItem('userMail', email);
             setAccessToken(token);
-
-        } catch(e: any) {
-            console.log(e);
-            if (e?.response?.error) {
-                return setError(e?.respose?.error);
+        } catch(e: any) {            
+            if (e?.response?.data?.error) {
+                return setError(e.response.data.error);
             }
-            setError('Ocorreu um erro ao processar o login, tente novamente.');
+
+            setError("Ocorreu um erro ao processar o login, tente novamente.");
         }
     }
 
     return (
-        <div className='container-login'>
+        <div className="container-login">
             <img src="/logo.svg" alt="Logo Fiap" className="logo"/>
             <form>
-                <p className='error'>{error}</p>
-                <div className='input'>
+                <p className="error">{error}</p>
+                <div className="input">
                     <img src="/mail.svg" alt="Informe seu login"/>
                     <input type="text" placeholder="Login"
                         value={login}
                         onChange={e => setLogin(e.target.value)}/>
                 </div>
-                <div className='input'>
+                <div className="input">
                     <img src="/lock.svg" alt="Infore seu login"/>
                     <input type="password" placeholder="Senha"
                         value={password}

@@ -1,13 +1,13 @@
-@import './configs.scss';
+@import './config.scss';
 
-.container-header {
+.container-header{
     display: flex;
     flex-direction: row;
     width: 100%;
     align-items: center;
     justify-content: space-between;
     border-bottom-color: $lightGreyColor;
-    border-bottom-width: 1px;
+    border-bottom-width: 1x;
     border-bottom-style: solid;
     padding: 24px 0px;
 
@@ -41,12 +41,12 @@
         }
     }
 
-    @media screen and(min-width: $mediaDesktop) {
-        .mobile {
+    @media screen and(min-width:$mediaDesktop) {
+        .mobile{
             display: none;
         }
 
-        .logo {
+        .logo{
             width: 130px;
             margin-left: 80px;
         }
@@ -63,7 +63,7 @@
             align-items: center;
 
             span {
-                font-size: 16px;
+                font-size: 24px;
                 letter-spacing: 2px;
             }
         }
@@ -74,13 +74,12 @@
             align-items: center;
             justify-content: center;
             margin-right: 80px;
-
+    
             span {
-                font-size: 18px;
+                font-size: 20px;
                 margin-right: 20px;
-                color: $primaryColor;
             }
-
+    
             img {
                 cursor: pointer;
             }

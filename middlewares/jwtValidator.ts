@@ -1,34 +1,34 @@
-import type {NextApiRequest, NextApiResponse, NextApiHandler} from 'next';
-import mongoose from 'mongoose';
-import { DefaultResponseMsg } from '../types/DefaultResponseMsg';
 import jwt, { JwtPayload } from 'jsonwebtoken';
+import { DefaultResponseMsg } from '../types/DefaultResponseMsg';
+import type { NextApiRequest, NextApiResponse, NextApiHandler } from 'next';
 
 export const jwtValidator = (handler : NextApiHandler) => 
     async (req : NextApiRequest, res : NextApiResponse<DefaultResponseMsg>) => {
 
     const {MY_SECRET_KEY} = process.env;
-    if(!MY_SECRET_KEY){
+    if (!MY_SECRET_KEY) {
         return res.status(500).json({error : 'ENV SECRET KEY não informada na execução do projeto'});
     }
 
-    if(!req || !req.headers){
+    if (!req || !req.headers) {
         return res.status(400).json({error : 'Não foi possível validar o token de segurança'});
     }
 
-    if(req.method !== 'OPTIONS'){
-        try{
+    if (req.method !== 'OPTIONS') {
+        try {
             const authorization = req.headers['authorization'];
-            if(!authorization){
+            console.log(req.headers);
+            if(!authorization){            
                 return res.status(400).json({error : 'Não foi possível validar o token de segurança'});
             }
-    
+
             const token = authorization.substr(7);
-            if(!token){
+            if (!token) {
                 return res.status(400).json({error : 'Token de segurança não informado'});
             }
     
             const decode = await jwt.verify(token, MY_SECRET_KEY) as JwtPayload;
-            if(!decode){
+            if (!decode) {
                 return res.status(400).json({error : 'Não foi possível validar o token de segurança'});
             }
     
@@ -37,7 +37,7 @@ export const jwtValidator = (handler : NextApiHandler) =>
             }else if(req.query){
                 req.query.userId = decode._id;
             }
-        }catch(e){
+        } catch(e) {
             return res.status(400).json({error : 'Não foi possível validar o token de segurança'});
         }
     }

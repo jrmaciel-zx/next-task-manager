@@ -1,6 +1,6 @@
-@import './configs.scss';
+@import './config.scss';
 
-.container-header {
+.container-footer {
     width: 100%;
     display: flex;
     align-items: center;
@@ -33,4 +33,24 @@
         }
     }
 
+    @media screen and(min-width: $mediaDesktop) {
+        height: 60px;
+        border-top-width: 1px;
+        border-top-style: solid;
+        border-top-color: $lightGreyColor;
+        border-left-width: 0px;
+        border-right-width: 0px;
+        border-bottom-width: 0px;
+        padding-bottom: 0px;
+
+        button {
+            display: none;
+        }
+
+        span {
+            color: $primaryColor;
+            display: block;
+            font-size: 14px;
+        }
+    }
 }
