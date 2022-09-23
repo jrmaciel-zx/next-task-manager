@@ -43,12 +43,14 @@ const saveTask = async (req: NextApiRequest, res: NextApiResponse, userId: strin
     const body = req.body as TaskRequest;
 
     const errorMsg = validateBody(body, userId);
-    if(errorMsg){
+    if (errorMsg) {
         return res.status(400).json({ error: errorMsg });
     }
 
     const previsionDate = moment(body.previsionDate);
     const now = moment();
+    console.log(body.previsionDate);
+    console.log(now);
     now.set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
     if (previsionDate.isBefore(now)) {
         return res.status(400).json({ error: 'Data não pode ser menor que hoje' });
@@ -73,12 +75,12 @@ const updateTask = async (req: NextApiRequest, res: NextApiResponse, userId: str
     }
 
     const task = await TaskModel.findById(taskId);
-    if(!task || task.userId !== userId){
+    if (!task || task.userId !== userId) {
         return res.status(400).json({ error: 'Tarefa não encontrada' });
     }
 
     const errorMsg = validateBody(body, userId);
-    if(errorMsg){
+    if (errorMsg) {
         return res.status(400).json({ error: errorMsg });
     }
 
@@ -99,7 +101,7 @@ const deleteTask = async (req: NextApiRequest, res: NextApiResponse, userId: str
     }
 
     const task = await TaskModel.findById(taskId);
-    if(!task || task.userId !== userId){
+    if (!task || task.userId !== userId) {
         return res.status(400).json({ error: 'Tarefa não encontrada' });
     }
 
@@ -115,24 +117,24 @@ const getTasks = async (req: NextApiRequest, res: NextApiResponse, userId: strin
         userId
     } as any;
 
-    if(params?.previsionDateStart){
+    if (params?.previsionDateStart) {
         const startDate = moment(params?.previsionDateStart).toDate();
         query.previsionDate = {$gte : startDate};
     }
 
-    if(params?.previsionDateEnd){
+    if (params?.previsionDateEnd) {
         const endDate = moment(params?.previsionDateEnd).toDate();
         
-        if(!query.previsionDate){
+        if (!query.previsionDate) {
             query.previsionDate = {}
         }
 
         query.previsionDate.$lte = endDate;
     }
 
-    if(params?.status){
+    if (params?.status) {
         const status = parseInt(params?.status);
-        switch(status){
+        switch(status) {
             case 1 : query.finishDate = null;
                 break;
             case 2 : query.finishDate = {$ne : null};
