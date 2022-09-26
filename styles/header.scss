@@ -61,10 +61,15 @@
             width: 170px;
             height: 40px;
             align-items: center;
+            font-weight: bold;
 
             span {
                 font-size: 24px;
                 letter-spacing: 2px;
+            }
+
+            &:hover {
+                background-color: $primaryColor;
             }
         }
 
@@ -76,8 +81,9 @@
             margin-right: 80px;
     
             span {
-                font-size: 20px;
+                font-size: 16px;
                 margin-right: 20px;
+                color: $primaryColor;
             }
     
             img {

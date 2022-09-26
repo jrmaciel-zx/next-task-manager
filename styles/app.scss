@@ -1,12 +1,4 @@
 @import "~bootstrap/scss/bootstrap";
-@import './config.scss';
-@import './login.scss';
-@import './header.scss';
-@import './filtros.scss';
-@import './list.scss';
-@import './item.scss';
-@import './footer.scss';
-@import './modal.scss';
 
 @font-face {
     font-family: 'Biennale Regular';
@@ -36,6 +28,15 @@ body {
     -webkit-box-align: center;
     padding: 0px;
 }
+
+@import './config.scss';
+@import './login.scss';
+@import './header.scss';
+@import './filtros.scss';
+@import './list.scss';
+@import './item.scss';
+@import './footer.scss';
+@import './modal.scss';
 
 input, select {
     font-style: normal;

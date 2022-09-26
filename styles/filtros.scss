@@ -34,7 +34,7 @@
     .filtrosMobile {
         display: flex;
         flex-direction: column;
-        align-items: center;
+        align-items: flex-end;
         justify-content: space-between;
         margin-top: 10px;
 
@@ -43,6 +43,7 @@
             flex-direction: row;
             align-items: center;
             padding-bottom: 8px;
+            max-width: 270px;
 
             label {
                 color: $primaryColor;

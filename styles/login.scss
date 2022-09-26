@@ -58,12 +58,19 @@
 
             &::-ms-input-placeholder {
                 color: $mediumGreyColor;
+                opacity: 1;
             }
 
             &:-ms-input-placeholder {
                 color: $mediumGreyColor;
+                opacity: 1;
             }
         }
+    }
+
+    .password {
+        position: relative;
+        right: 30px;
     }
 
     button {

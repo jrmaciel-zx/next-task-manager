@@ -24,7 +24,7 @@ export const Home : NextPage<AccessTokenProps> = ({setAccessToken}) => {
     const [modalPrevisionDateStart, setModalPrevisionDateStart] = useState('');
 
     const getFilteredList = async() =>{
-        try{
+        try {
             let query = '?status=' + status;
 
             if (previsionDateStart) {
@@ -39,7 +39,7 @@ export const Home : NextPage<AccessTokenProps> = ({setAccessToken}) => {
             if (result && result.data) {
                 setTasks(result.data);
             }
-        }catch(e) {
+        } catch(e) {
             console.log(e);
         }
     }
@@ -69,6 +69,7 @@ export const Home : NextPage<AccessTokenProps> = ({setAccessToken}) => {
 
             await executeRequest('task', 'POST', body);
             await getFilteredList();
+            closeModal();
         } catch(e: any) {
             console.log(e);
 
@@ -91,38 +92,37 @@ export const Home : NextPage<AccessTokenProps> = ({setAccessToken}) => {
         <>
             <Header sair={sair} setShowModal={setShowModal}/>
             <Filter
-                periodoDe = {previsionDateStart}
-                setPeriodoDe = {setPrevisionDateStart}
-                periodoAte = {previsionDateEnd}
-                setPeriodoAte = {setPrevisionDateEnd}
-                status = {status}
-                setStatus = {setStatus}
+                periodoDe={previsionDateStart}
+                setPeriodoDe={setPrevisionDateStart}
+                periodoAte={previsionDateEnd}
+                setPeriodoAte={setPrevisionDateEnd}
+                status={status}
+                setStatus={setStatus}
             />
-            <List tasks = {tasks} getFilteredList = {getFilteredList}/>
+            <List tasks={tasks} getFilteredList={getFilteredList}/>
             <Footer setShowModal={setShowModal}/>
             <Modal
-                show = {showModal}
-                onHide = {closeModal}
-                className = "container-modal">
+                show={showModal}
+                onHide={closeModal}
+                className="container-modal">
                 <Modal.Body>
                     <p>Adicionar Tarefa</p>
-                    {error && <p className='error'>{error}</p>}
+                    {error && <p className="error">{error}</p>}
                     <input
-                        type="text"
+                        type='text'
                         placeholder="Nome da tarefa"
                         value={name}
                         onChange={e => setName(e.target.value)}/>
                     <input
-                        type={modalPrevisionDateStart ? 'date' : 'text'}
-                        placeholder='Data de previsão'
+                        type={modalPrevisionDateStart ? 'date' : 'text'}                        
+                        placeholder="Data de previsão"
                         onFocus={e => e.target.type = 'date'}
                         onBlur={e => modalPrevisionDateStart ? e.target.type = 'date' : e.target.type = 'text'}
                         value={modalPrevisionDateStart}
-                        onChange={e => setModalPrevisionDateStart(moment(e.target.value).format("DD/MM/YYYY"))}
-                        />
+                        onChange={e => setModalPrevisionDateStart(e.target.value)}/>
                 </Modal.Body>
                 <Modal.Footer>
-                    <div className='button col-12'>
+                    <div className="button col-12">
                         <button onClick={salvar}>Salvar</button>
                         <span onClick={closeModal}>Cancelar</span>
                     </div>

@@ -1,6 +1,6 @@
 import { NextPage } from 'next';
+import { Task } from '../types/Task';
 import React from 'react';
-import {Task} from '../types/Task';
 import moment from 'moment';
 
 type ItemProps = {
@@ -18,11 +18,11 @@ export const Item : NextPage<ItemProps> = ({task, selectTaskToEdit}) => {
     }
     
     return (
-        <div className={'container-item' + (task.finishDate? "" : "ativo")}>
-            <img src={task.finishDate? '/checked.svg' : '/not-checked.svg'}
-                alt={task.finishDate? 'Atividade Concluída' : 'Atividade Ativa'}/>
-            <div>
-                <p className={task.finishDate? "concluido" : ""}>{task.name}</p>
+        <div className={"container-item" + (task.finishDate ? "" : " ativo")}
+            onClick={e => task.finishDate ? null : selectTaskToEdit(task)}>
+            <img src={task?.finishDate ? '/checked.svg' : 'not-checked.svg'} alt={task?.finishDate ? "Tarefa concluída" : "Tarefa não concluída"}/>                  
+            <div>                
+                <p className={task.finishDate ? "concluido" : ""}>{task.name}</p>
                 <span>{getDataText(task.finishDate, task.previsionDate)}</span>
             </div>
         </div>

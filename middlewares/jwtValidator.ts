@@ -17,8 +17,7 @@ export const jwtValidator = (handler : NextApiHandler) =>
     if (req.method !== 'OPTIONS') {
         try {
             const authorization = req.headers['authorization'];
-            console.log(req.headers);
-            if(!authorization){            
+            if (!authorization) {            
                 return res.status(400).json({error : 'Não foi possível validar o token de segurança'});
             }
 
@@ -32,9 +31,9 @@ export const jwtValidator = (handler : NextApiHandler) =>
                 return res.status(400).json({error : 'Não foi possível validar o token de segurança'});
             }
     
-            if(req.body){
+            if (req.body) {
                 req.body.userId = decode._id;
-            }else if(req.query){
+            }else if (req.query) {
                 req.query.userId = decode._id;
             }
         } catch(e) {

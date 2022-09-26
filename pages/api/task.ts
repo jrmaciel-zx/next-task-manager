@@ -21,21 +21,21 @@ const taskEndpoint = async (req: NextApiRequest, res: NextApiResponse<DefaultRes
         case 'GET':
             return await getTasks(req, res, userId);
         default:
-            return res.status(405).json({ error: 'Metodo infomado não é valido' });
+            return res.status(405).json({ error: "Metodo infomado não é valido" });
     }
 }
 
 const validateBody = (body : TaskRequest, userId : string) => {
     if (!userId) {
-        return 'Usuario não informado';
+        return "Usuario não informado";
     }
 
     if (!body.name || body.name.length < 2) {
-        return 'Nome inválido';
+        return "Nome inválido";
     }
 
     if (!body.previsionDate) {
-        return 'Data inválida';
+        return "Data inválida";
     }
 }
 
@@ -49,11 +49,9 @@ const saveTask = async (req: NextApiRequest, res: NextApiResponse, userId: strin
 
     const previsionDate = moment(body.previsionDate);
     const now = moment();
-    console.log(body.previsionDate);
-    console.log(now);
     now.set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
     if (previsionDate.isBefore(now)) {
-        return res.status(400).json({ error: 'Data não pode ser menor que hoje' });
+        return res.status(400).json({error: "Data não pode ser menor que hoje"});
     }
 
     const task = {
@@ -63,7 +61,7 @@ const saveTask = async (req: NextApiRequest, res: NextApiResponse, userId: strin
     }
 
     await TaskModel.create(task);
-    return res.status(200).json({ msg: 'Tarefa Criada' });
+    return res.status(200).json({msg: "Tarefa Criada"});
 }
 
 const updateTask = async (req: NextApiRequest, res: NextApiResponse, userId: string) => {
@@ -71,17 +69,17 @@ const updateTask = async (req: NextApiRequest, res: NextApiResponse, userId: str
 
     const taskId = req?.query?.id;
     if (!taskId) {
-        return res.status(400).json({ error: 'Tarefa não informada' });
+        return res.status(400).json({error: "Tarefa não informada"});
     }
 
     const task = await TaskModel.findById(taskId);
     if (!task || task.userId !== userId) {
-        return res.status(400).json({ error: 'Tarefa não encontrada' });
+        return res.status(400).json({error: "Tarefa não encontrada"});
     }
 
     const errorMsg = validateBody(body, userId);
     if (errorMsg) {
-        return res.status(400).json({ error: errorMsg });
+        return res.status(400).json({error: errorMsg});
     }
 
     const previsionDate = moment(body.previsionDate);
@@ -91,22 +89,22 @@ const updateTask = async (req: NextApiRequest, res: NextApiResponse, userId: str
     task.finishDate = body.finishDate ? moment(body.finishDate) : null;
 
     await TaskModel.findByIdAndUpdate({ _id: task._id}, task);
-    return res.status(200).json({ msg: 'Tarefa Alterada' });
+    return res.status(200).json({msg: "Tarefa Alterada"});
 }
 
 const deleteTask = async (req: NextApiRequest, res: NextApiResponse, userId: string) => {
     const taskId = req?.query?.id;
     if (!taskId) {
-        return res.status(400).json({ error: 'Tarefa não informada' });
+        return res.status(400).json({error: "Tarefa não informada"});
     }
 
     const task = await TaskModel.findById(taskId);
     if (!task || task.userId !== userId) {
-        return res.status(400).json({ error: 'Tarefa não encontrada' });
+        return res.status(400).json({error: "Tarefa não encontrada"});
     }
 
     await TaskModel.findByIdAndDelete({ _id: task._id});
-    return res.status(200).json({ msg: 'Tarefa Deletada' });
+    return res.status(200).json({msg: "Tarefa Deletada"});
 }
 
 const getTasks = async (req: NextApiRequest, res: NextApiResponse, userId: string) => {

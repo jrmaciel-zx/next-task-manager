@@ -1,4 +1,4 @@
-import React, { ChangeEvent, MouseEvent, useState } from 'react'
+import React, { MouseEvent, useState } from 'react'
 import { executeRequest } from '../services/apiServices'
 import { NextPage } from 'next'
 import { AccessTokenProps } from '../types/AccessTokenProps'
@@ -32,7 +32,7 @@ export const Login : NextPage<AccessTokenProps> = ({setAccessToken}) => {
             setAccessToken(token);
         } catch(e: any) {            
             if (e?.response?.data?.error) {
-                return setError(e.response.data.error);
+                return setError(e?.response.data?.error);
             }
 
             setError("Ocorreu um erro ao processar o login, tente novamente.");
@@ -41,18 +41,18 @@ export const Login : NextPage<AccessTokenProps> = ({setAccessToken}) => {
 
     return (
         <div className="container-login">
-            <img src="/logo.svg" alt="Logo Fiap" className="logo"/>
+            <img src='/logo.svg' alt="Logo Fiap" className="logo"/>
             <form>
                 <p className="error">{error}</p>
                 <div className="input">
-                    <img src="/mail.svg" alt="Informe seu login"/>
-                    <input type="text" placeholder="Login"
+                    <img src='/mail.svg' alt="Informe seu login"/>
+                    <input type='text' placeholder="Login"
                         value={login}
                         onChange={e => setLogin(e.target.value)}/>
                 </div>
                 <div className="input">
-                    <img src="/lock.svg" alt="Infore seu login"/>
-                    <input type="password" placeholder="Senha"
+                    <img src='/lock.svg' alt="Infore seu login"/>
+                    <input type='password' placeholder="Senha"
                         value={password}
                         onChange={e => setPassword(e.target.value)}/>                  
                 </div>

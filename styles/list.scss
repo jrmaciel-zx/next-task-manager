@@ -1,6 +1,6 @@
 @import './config.scss';
 
-.container-listagem{
+.container-listagem {
     display: flex;
     flex: 1;
     width: 100%;
@@ -16,7 +16,7 @@
         width: 240px;
     }
 
-    p{
+    p {
         color: $primaryColor;
         font-size: 14px;
         display: block;

@@ -25,14 +25,14 @@ export const Filter: NextPage<FilterProps> = ({
                 <div className="form">
                     <div>
                         <label>Data prevista da conclusão:</label>
-                        <input type="date"
+                        <input type='date'
                             value={periodoDe}
                             onChange={e => setPeriodoDe(e.target.value)}
                         />
                     </div>
                     <div>
                         <label>até</label>
-                        <input type="date"
+                        <input type='date'
                             value={periodoAte}
                             onChange={e => setPeriodoAte(e.target.value)}
                         />                        
@@ -53,14 +53,14 @@ export const Filter: NextPage<FilterProps> = ({
             {showFilters && <div className="filtrosMobile">
                 <div>
                     <label>Data prevista da conclusão:</label>
-                    <input type="date"
+                    <input type='date'
                             value={periodoDe}
                             onChange={e => setPeriodoDe(e.target.value)}
                     />
                 </div>
                 <div>
                     <label>até</label>
-                    <input type="date"
+                    <input type='date'
                             value={periodoAte}
                             onChange={e => setPeriodoAte(e.target.value)}                    
                     />
@@ -71,9 +71,9 @@ export const Filter: NextPage<FilterProps> = ({
                     <select
                             value={status}
                             onChange={e => setStatus(e.target.value)}>                    
-                        <option>Todas</option>
-                        <option>Ativas</option>
-                        <option>Concluídas</option>
+                            <option value={0}>Todas</option>
+                            <option value={1}>Ativas</option>
+                            <option value={2}>Concluídas</option>
                     </select>
                 </div>
             </div>}        
